@@ -34,9 +34,9 @@ jobs:
       - name: change directory to apps/
         run: cd apps
       - name: create app
-        run: flutter create Tunes
+        run: flutter create tunes
       - name: cd into app/
-        run: cd Tunes
+        run: cd tunes
       - name: Get dependencies
         run: flutter pub get
         
