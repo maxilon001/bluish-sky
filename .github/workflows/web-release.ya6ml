@@ -39,8 +39,10 @@ jobs:
         run: cd tunes
       - name: list tunes
         run: ls
-      - name: Get dependencies
-        run: flutter pub get
+      #- name: Get dependencies
+        #run:
+          #- cd apps/tunes
+          #- flutter pub get
         
       - name: Start Web Release Build
         run: flutter build web --release
