@@ -17,16 +17,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
-          java-version: "12.x"
-          #cache: gradle
+          java-version: '11'
+          distribution: 'temurin'
+          #cache: none #gradle
+          check-latest: true
+          
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: "latest"
           channel: 'stable'
-          cache: true
+          #cache: true
       
       - name: Get dependencies
         run: flutter pub get
