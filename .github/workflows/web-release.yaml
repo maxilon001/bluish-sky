@@ -31,6 +31,13 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: change directory to apps/
+        run: cd apps
+      - name: create app
+        run: flutter create Tunes
+      - name: cd into app/
+        run: cd Tunes
+      
       - name: Start Web Release Build
         run: flutter build web --release
      
