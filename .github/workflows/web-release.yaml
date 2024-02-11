@@ -37,6 +37,8 @@ jobs:
         run: flutter create tunes
       - name: cd into app/
         run: cd tunes
+      - name: list tunes
+        run: ls
       - name: Get dependencies
         run: flutter pub get
         
