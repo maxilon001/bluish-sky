@@ -23,7 +23,7 @@ jobs:
       run: flutter pub get
 
     - name: Build Web
-      run: flutter build web --release
+      run: flutter build web --release --base-href=/bluish-sky/
 
     - name: Upload Web Build Files
       uses: actions/upload-artifact@v2
