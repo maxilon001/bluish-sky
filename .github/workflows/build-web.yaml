@@ -1,52 +1,44 @@
-name: Web Release 
+name: Flutter Web CI/CD
 
 on:
   push:
-    branches:  [ "main" ]
-    #paths: ['apps/**']
-
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
-    #paths: ['apps/**']
-
-  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
   build:
-    name: Create Web Build
+    name: Build Web Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          check-latest: true
-
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.16.9"
-          channel: 'stable'
-
-      - name: Start Web Release Build
-        run: flutter build web --release
-
-      - name: Upload Web Build Files
-        uses: actions/upload-artifact@v2
-        with:
-          name: web-release
-          path: ./build/web
-
-deploy:
-  name: Deploy Web Build
-  needs: build
-  runs-on: ubuntu-latest
-
-  steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '3.16.9' # the Flutter version
+
+    - name: Install Dependencies
+      run: flutter pub get
+
+    - name: Build Web
+      run: flutter build web --release
+
+    - name: Upload Web Build Files
+      uses: actions/upload-artifact@v2
+      with:
+        name: web-release
+        path: build/web
+
+  deploy:
+    name: Deploy Web Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
     - name: Download Web Release
       uses: actions/download-artifact@v2
       with:
