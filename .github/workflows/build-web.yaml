@@ -38,23 +38,23 @@ jobs:
           name: web-release
           path: ./build/web
 
-  deploy:
-    name: Deploy Web Build
-    needs: build
-    runs-on: ubuntu-latest
+deploy:
+  name: Deploy Web Build
+  needs: build
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Download Web Release
-        uses: actions/download-artifact@v2
-        with:
-          name: web-release
-         bpath: web
+    - name: Download Web Release
+      uses: actions/download-artifact@v2
+      with:
+        name: web-release
+        path: web
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./web
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./web
