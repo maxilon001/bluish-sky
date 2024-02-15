@@ -39,12 +39,12 @@ class MyHomePage extends StatelessWidget {
         children: [
           Text('A random idea:'),
           Text(appState.current.asLowerCase),
-          ElevatedButton(){
-            onchange(){
+          ElevatedButton(
+            onPressed: (){
               Text('button pressed ');
-            };
-            child: Text('Next');
-          };
+            },
+            child: Text('Next'),
+          ),
         ],
       ),
     );
